@@ -1,7 +1,11 @@
 package com.hexaware.util;
 
+import com.hexaware.model.*;
+import com.hexaware.persistence.*;
+import com.hexaware.mapper.*;
 import org.skife.jdbi.v2.DBI;
 import com.hexaware.persistence.*;
+import java.util.List;
 
 public class JdbiClient {
     public static void main(String args[]){
@@ -13,7 +17,7 @@ public class JdbiClient {
         }
     }
 
-   public final DBI getConnect() {
+   public static final DBI getConnect() {
     try {
       Class.forName("com.mysql.jdbc.Driver");
       DBI dbi = new DBI("jdbc:mysql://localhost/training?useSSL=false", "root", "welcome");

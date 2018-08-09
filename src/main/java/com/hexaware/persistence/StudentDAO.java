@@ -13,5 +13,9 @@ public interface StudentDAO {
   @Mapper(StudentMapper.class)
   List<Student> list();
 
+
+  @SqlQuery("SELECT * FROM STUDENT WHERE STUDENT_ID=:studentId")
+  @Mapper(StudentMapper.class)
+  List<Student> findById(@Bind("studentId")int studentId);
   void close();
 }
