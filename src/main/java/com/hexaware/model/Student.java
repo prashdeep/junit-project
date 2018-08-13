@@ -1,5 +1,7 @@
 package com.hexaware.model;
 
+import java.util.Objects;
+
 public class Student {
     private int id;
     private String name;
@@ -34,4 +36,33 @@ public class Student {
     public int getGrade(){
         return this.grade;
     }
+
+    @Override
+    public final boolean equals(final Object obj) {
+        if (obj == null) {
+        return false;
+        }
+        if (getClass() != obj.getClass()) {
+        return false;
+        }
+        Student student = (Student) obj;
+        if (Objects.equals(id, student.getId())
+            && Objects.equals(name, student.getName())
+            && Objects.equals(grade, student.getGrade())) {
+        return true;
+        }
+        return false;
+  }
+
+  @Override
+  public final int hashCode() {
+    return Objects.hash(id, name, grade);
+  }
+
+  @Override
+  public String toString(){
+      return "{ id: "+id+", "+" name: "+name+", "+ " grade: "+grade+"}";
+  }
+
+
 }
