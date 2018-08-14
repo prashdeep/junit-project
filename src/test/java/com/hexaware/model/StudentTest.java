@@ -14,6 +14,9 @@ import mockit.MockUp;
 import mockit.Mocked;
 import mockit.Mock;
 import mockit.integration.junit4.JMockit;
+import java.util.*;
+import mockit.*;
+import com.hexaware.persistence.*;
 
 @RunWith(JMockit.class)
 public class StudentTest{
@@ -60,5 +63,35 @@ public class StudentTest{
         assertEquals(student.toString(), "{ id: 12,  name: Vinay,  grade: 4}");
     }
 
+
+    @Test
+    public void testFetchStudentsListWithNullValue(@Mocked final StudentDAO dao){
+        new Expectations() {{ 
+                dao.list();
+                result=null;                    
+            }};
+            List<Student> list = student.fetchAllStudents(dao);
+
+        new Verifications() {{
+            dao.list(); times = 1;
+            //student.getName(); times = 0;
+
+      }};
+    }
+
+  @Test
+    public void testFetchStudentsListWithNullValue(@Mocked final StudentDAO dao){
+        new Expectations() {{ 
+                dao.list();
+                result=new ArrayList<Student>();                    
+            }};
+            List<Student> list = student.fetchAllStudents(dao);
+            assertTrue(list.isEmpty());
+        new Verifications() {{
+            dao.list(); times = 1;
+            //student.getName(); times = 0;
+
+      }};
+    }
 
 }
